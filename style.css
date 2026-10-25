@@ -10,12 +10,12 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #000;
-  cursor: none;
+  background-color: #0d0d0d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* メインコンテナ: 画面いっぱいに表示 */
-#jumpscare-container {
+/* --- 罠（偽装画面） --- */
+#trap-screen {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,11 +24,89 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(circle at center, #1f1f1f 0%, #0a0a0a 100%);
+  cursor: pointer;
+  z-index: 50;
+}
+
+.trap-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* 動画再生風ボタン */
+.play-btn-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.play-btn-circle svg {
+  margin-left: 6px;
+}
+
+.trap-text {
+  margin-top: 18px;
+  color: #cccccc;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* 参考元（heartstopper）風ボタン */
+.hs-title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.hs-button {
+  background-color: #8b5cf6;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.hs-subtext {
+  margin-top: 20px;
+  color: #9ca3af;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* --- ホラー演出画面 --- */
+#jumpscare-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
   background-color: #000;
   z-index: 100;
 }
 
-/* 画像ラッパー */
 #image-wrapper {
   position: absolute;
   top: 0;
@@ -41,7 +119,6 @@ html, body {
   animation: shock-shake 0.08s infinite alternate;
 }
 
-/* 参考元のホラー画像（原画のまま全画面表示） */
 #scare-image {
   width: 100%;
   height: 100%;
@@ -49,26 +126,8 @@ html, body {
   display: block;
 }
 
-/* 登場時の小刻みなショック振動（画像の視認性を邪魔しない程度） */
 @keyframes shock-shake {
-  0% {
-    transform: scale(1.02) translate(-2px, -2px);
-  }
-  50% {
-    transform: scale(1.05) translate(3px, 2px);
-  }
-  100% {
-    transform: scale(1.03) translate(-3px, 3px);
-  }
-}
-
-/* 画面全体のタップ判定 */
-#click-trigger {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 200;
-  cursor: pointer;
+  0% { transform: scale(1.02) translate(-3px, -2px); }
+  50% { transform: scale(1.05) translate(3px, 3px); }
+  100% { transform: scale(1.03) translate(-2px, 3px); }
 }
