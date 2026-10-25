@@ -3,42 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Video</title>
-  <link rel="stylesheet" href="./style.css?v=4">
+  <title>...</title>
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
-  <!-- 罠: 音声を鳴らすためにタップを誘発する偽装画面 -->
-  <div id="trap-screen">
-    <!-- デフォルト: 動画再生風ボタン -->
-    <div id="play-trap" class="trap-content">
-      <div class="play-btn-circle">
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="#ffffff">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-      </div>
-      <p class="trap-text">Tap to play</p>
-    </div>
+  <!-- タップ待ち画面（ボタンなし・全画面黒） -->
+  <div id="trap-screen"></div>
 
-    <!-- 参考元（heartstopper）風ボタン -->
-    <div id="heartstopper-trap" class="trap-content" style="display: none;">
-      <h1 class="hs-title">HEARTSTOPPER</h1>
-      <button class="hs-button">Start the Experience</button>
-      <p class="hs-subtext">Click the button above to reveal a surprise</p>
-    </div>
-  </div>
-
-  <!-- ホラー演出コンテナ（タップされた瞬間に爆音とともに全画面発動） -->
+  <!-- ホラー演出コンテナ（発動時に全画面表示） -->
   <div id="jumpscare-container" style="display: none;">
     <div id="image-wrapper">
-      <img id="scare-image" src="./assets/jumpscareImage.jpg?v=4" alt="Jumpscare">
+      <img id="scare-image" src="./assets/jumpscareImage.jpg?v=5" alt="Jumpscare">
     </div>
   </div>
 
   <!-- 参考元の叫び声音声 -->
   <audio id="scare-audio" preload="auto" loop>
-    <source src="./assets/jumpscareSound.mp3?v=4" type="audio/mpeg">
+    <source src="./assets/jumpscareSound.mp3?v=5" type="audio/mpeg">
   </audio>
 
-  <script src="./script.js?v=4"></script>
+  <script src="./script.js?v=5"></script>
 </body>
 </html>
