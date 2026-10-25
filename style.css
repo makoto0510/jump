@@ -7,14 +7,14 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   background-color: #000;
   cursor: none;
 }
 
-/* メインコンテナ */
+/* メインコンテナ: 画面いっぱいに表示 */
 #jumpscare-container {
   position: fixed;
   top: 0;
@@ -24,7 +24,6 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   background-color: #000;
   z-index: 100;
 }
@@ -32,155 +31,38 @@ html, body {
 /* 画像ラッパー */
 #image-wrapper {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: shock-shake 0.08s infinite alternate;
 }
 
-/* ホラー画像本体 */
+/* 参考元のホラー画像（原画のまま全画面表示） */
 #scare-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: contrast(160%) brightness(110%);
-  animation: zoom-pulse 0.25s infinite alternate;
 }
 
-/* 激しい画面振動アニメーション */
-.shake-extreme {
-  animation: extreme-shake 0.05s infinite alternate;
-}
-
-@keyframes extreme-shake {
+/* 登場時の小刻みなショック振動（画像の視認性を邪魔しない程度） */
+@keyframes shock-shake {
   0% {
-    transform: translate(0, 0) rotate(0deg) scale(1.05);
-  }
-  20% {
-    transform: translate(-14px, 12px) rotate(-2deg) scale(1.1);
-  }
-  40% {
-    transform: translate(16px, -10px) rotate(2.5deg) scale(1.08);
-  }
-  60% {
-    transform: translate(-18px, -14px) rotate(-1.5deg) scale(1.12);
-  }
-  80% {
-    transform: translate(15px, 16px) rotate(2deg) scale(1.07);
-  }
-  100% {
-    transform: translate(-10px, 8px) rotate(-2.5deg) scale(1.14);
-  }
-}
-
-/* ズームパルス */
-@keyframes zoom-pulse {
-  0% {
-    transform: scale(1);
-    filter: invert(0%) hue-rotate(0deg) contrast(150%);
+    transform: scale(1.02) translate(-2px, -2px);
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.05) translate(3px, 2px);
   }
   100% {
-    transform: scale(1.18);
-    filter: invert(15%) hue-rotate(180deg) contrast(200%);
+    transform: scale(1.03) translate(-3px, 3px);
   }
 }
 
-/* 赤黒ストロボ点滅オーバーレイ */
-#strobe-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 101;
-  mix-blend-mode: overlay;
-  animation: strobe-flash 0.08s infinite;
-}
-
-@keyframes strobe-flash {
-  0% {
-    background-color: rgba(255, 0, 0, 0.55);
-  }
-  25% {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  50% {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-  75% {
-    background-color: rgba(180, 0, 0, 0.7);
-  }
-  100% {
-    background-color: rgba(0, 0, 0, 0.9);
-  }
-}
-
-/* 周辺減光（ヴィネット） */
-#vignette {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 102;
-  background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.9) 95%);
-}
-
-/* ノイズ・グリッチスキャンライン */
-#glitch-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 103;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.3) 0px,
-    rgba(0, 0, 0, 0.3) 2px,
-    transparent 2px,
-    transparent 4px
-  );
-  animation: scanlines 0.2s steps(4) infinite;
-}
-
-@keyframes scanlines {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(4px); }
-}
-
-/* 不気味な血文字テロップ */
-#scare-text {
-  position: absolute;
-  bottom: 8%;
-  width: 100%;
-  text-align: center;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  font-size: clamp(2rem, 8vw, 5rem);
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  color: #ff0000;
-  text-shadow: 0 0 10px #ff0000, 0 0 30px #000, 2px 2px 0 #fff;
-  z-index: 104;
-  pointer-events: none;
-  animation: text-flicker 0.15s infinite alternate;
-}
-
-@keyframes text-flicker {
-  0% { opacity: 0.9; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.05) skewX(5deg); }
-  100% { opacity: 1; transform: scale(0.98) skewX(-5deg); }
-}
-
-/* 画面全体の透明なクリックスポンジ（自動再生ブロック解除用） */
+/* 画面全体のタップ判定 */
 #click-trigger {
   position: fixed;
   top: 0;

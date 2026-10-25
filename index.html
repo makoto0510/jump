@@ -3,34 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>...</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Surprise</title>
+  <link rel="stylesheet" href="./style.css?v=3">
 </head>
 <body>
-  <!-- ホラー演出のメインコンテナ -->
-  <div id="jumpscare-container" class="active">
-    <div id="strobe-overlay"></div>
-    <div id="vignette"></div>
-    <div id="glitch-overlay"></div>
-    
-    <!-- ホラー画像表示エリア -->
-    <div id="image-wrapper" class="shake-extreme">
-      <img id="scare-image" src="assets/jumpscareImage.jpg" alt="scare">
+  <!-- ホラー演出コンテナ -->
+  <div id="jumpscare-container">
+    <div id="image-wrapper">
+      <img id="scare-image" src="./assets/jumpscareImage.jpg?v=3" alt="Jumpscare">
     </div>
-
-    <!-- 不気味なメッセージ（非表示またはフラッシュ表示可能） -->
-    <div id="scare-text"></div>
   </div>
 
-  <!-- 参考元の音声ファイル（即時自動再生） -->
+  <!-- 参考元（heartstopper）の叫び声音声 -->
   <audio id="scare-audio" preload="auto" loop>
-    <source src="assets/jumpscareSound.mp3" type="audio/mpeg">
-    <source src="assets/scream.mp3" type="audio/mpeg">
+    <source src="./assets/jumpscareSound.mp3?v=3" type="audio/mpeg">
   </audio>
 
-  <!-- 音声自動再生ブロック解除用の透明全面タップオーバーレイ -->
-  <div id="click-trigger" title="Tap anywhere"></div>
+  <!-- 画面全体のクリック・タップ検知用透明レイヤー -->
+  <div id="click-trigger"></div>
 
-  <script src="script.js"></script>
+  <script src="./script.js?v=3"></script>
 </body>
 </html>
