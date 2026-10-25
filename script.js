@@ -106,10 +106,11 @@
     }
   }
 
-  // --- サウンド再生のトリガー ---
+  // --- 音声再生の管理 ---
+  let isAudioPlaying = false;
+
   function triggerSound() {
-    if (isSoundStarted) return;
-    isSoundStarted = true;
+    if (isAudioPlaying) return;
 
     // スマホ端末等のバイブレーション
     if ('vibrate' in navigator) {
@@ -118,9 +119,8 @@
       } catch (e) {}
     }
 
-    // 外部音声ファイルの再生試行
-    let playedExternal = false;
-    if (customSound) {
+    // 参考元音声（またはカスタム音声）の再生
+    if (customSound && audioElement.src !== customSound) {
       audioElement.src = customSound;
     }
     audioElement.volume = 1.0;
@@ -129,14 +129,17 @@
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
-          playedExternal = true;
+          isAudioPlaying = true;
         })
         .catch(() => {
-          // 外部ファイルの再生失敗またはブロック時はWeb Audio合成音を使用
-          createSynthesizedScream();
+          // ブラウザの自動再生ブロック時:
+          // 合成音を鳴らしつつ、次のユーザー操作（クリック/タップ）で音声ファイルを再試行
+          if (!audioCtx) {
+            createSynthesizedScream();
+          }
         });
     } else {
-      createSynthesizedScream();
+      isAudioPlaying = true;
     }
   }
 

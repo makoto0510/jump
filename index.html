@@ -15,18 +15,17 @@
     
     <!-- ホラー画像表示エリア -->
     <div id="image-wrapper" class="shake-extreme">
-      <img id="scare-image" src="assets/scare.svg" alt="scare">
+      <img id="scare-image" src="assets/jumpscareImage.jpg" alt="scare">
     </div>
 
     <!-- 不気味なメッセージ（非表示またはフラッシュ表示可能） -->
     <div id="scare-text"></div>
   </div>
 
-  <!-- 外部音声ファイル（配置されていれば自動再生） -->
-  <audio id="scare-audio" preload="auto">
+  <!-- 参考元の音声ファイル（即時自動再生） -->
+  <audio id="scare-audio" preload="auto" loop>
+    <source src="assets/jumpscareSound.mp3" type="audio/mpeg">
     <source src="assets/scream.mp3" type="audio/mpeg">
-    <source src="assets/scream.ogg" type="audio/ogg">
-    <source src="assets/scream.wav" type="audio/wav">
   </audio>
 
   <!-- 音声自動再生ブロック解除用の透明全面タップオーバーレイ -->
